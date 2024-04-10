@@ -21,7 +21,7 @@ function adminLogin() {
             })
             .then(res=>{
                 if(res.data=="exist"){
-                    history("/home",{state:{id:email}})
+                    history("/adminhome",{state:{id:email}})
                 }
                 else if(res.data=="notexist"){
                     alert("User have not sign up")
