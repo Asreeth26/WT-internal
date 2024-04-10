@@ -4,7 +4,7 @@ import './Login.css'
 import { useNavigate, Link } from "react-router-dom"
 
 
-function Login() {
+function adminLogin() {
 
     const history=useNavigate();
 
@@ -16,7 +16,7 @@ function Login() {
 
         try{
 
-            await axios.post("http://localhost:8000/",{
+            await axios.post("http://localhost:8000/admin",{
                 email,password
             })
             .then(res=>{
@@ -59,7 +59,7 @@ function Login() {
               <div class="shape"></div>
           </div>
           <form  className="form" onSubmit={submit}>
-              <h3>Teacher Login</h3>
+              <h3>Admin Login</h3>
       
               <label for="email">Email</label>
               <input type="email" onChange={(e) => { setEmail(e.target.value) }} placeholder="Email"  />
@@ -72,4 +72,4 @@ function Login() {
           )
 }
 
-export default Login
+export default adminLogin
