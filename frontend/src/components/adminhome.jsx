@@ -71,10 +71,9 @@ function adminhome(){
       <strong>Filename:</strong> {files.section}
       <br />
       <strong>File Data:</strong>
-      {console.log(files.file)}
-      <embed
-               src={files.file}
-            width="800" height="500"/>
+            <a href={`data:application/pdf;base64,${files.file}`} download={files.section}>
+                            Download
+            </a>
     </li>
   ))}
 </ul>
