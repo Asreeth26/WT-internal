@@ -9,12 +9,13 @@ mongoose.connect('mongodb://0.0.0.0:27017/Project')
     });
 
 const newSchema = new mongoose.Schema({
-    file: {
-        data: Buffer, // Buffer to store binary data of the PDF file
-        contentType: String // Mime type of the file (e.g., application/pdf)
-    },
+    file: Buffer,
     section: String,
-    subject: String
+    subject: String,
+    pickedBy: {
+        type: String,
+        default: null
+    }
 });
 
 const question = mongoose.model("question", newSchema); // Renamed the collection to "files"

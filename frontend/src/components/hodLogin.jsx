@@ -21,7 +21,7 @@ function hodLogin() {
             })
             .then(res=>{
                 if(res.data=="exist"){
-                    history("/home",{state:{id:email}})
+                    history("/adminhod",{state:{id:email}})
                 }
                 else if(res.data=="notexist"){
                     alert("User have not sign up")

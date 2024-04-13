@@ -5,6 +5,7 @@ import Admin from "./components/adminLogin"
 import Hod from "./components/hodLogin"
 import Signup from "./components/Signup"
 import Adminhome from "./components/adminhome"
+import Adminhod from "./components/adminhod"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from 'react';
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/home" element={<Home/>}/>
           <Route path="/adminhome" element={<Adminhome/>}/>
+          <Route path="/adminhod" element={<Adminhod/>}/>
         </Routes>
       </Router>
     </div>

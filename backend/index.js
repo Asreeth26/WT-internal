@@ -140,10 +140,7 @@ app.post('/questionpaper', upload.single('file'), async (req, res) => {
 
         const filter = { section }; // Define the filter to find the document by section
         const update = {
-            file: {
-                data: fileBuffer,
-                contentType: req.file.mimetype // Store the MIME type of the file
-            },
+            file: fileBuffer,
             section,
             subject
         };
@@ -158,7 +155,70 @@ app.post('/questionpaper', upload.single('file'), async (req, res) => {
     }
 });
 
+app.get('/questionpaper', async (req, res) => {
+    try {
+        // Retrieve all documents from the collection
+        const files = await question.find({});
 
+        // Send the retrieved files as JSON response to the client
+        res.status(200).json(files);
+    } catch (error) {
+        console.error('Error retrieving files:', error);
+        res.status(500).send('Failed to retrieve files');
+    }
+});
+
+app.post('/update-pick', async (req, res) => {
+    try {
+        // Find all documents in the collection
+        question.updateMany({},
+            {$set : {"pick":false}}
+        ) 
+
+        res.status(200).send('Records updated successfully');
+    } catch (error) {
+        console.error('Error updating records:', error);
+        res.status(500).send('Failed to update records');
+    }
+});
+
+
+app.post('/selectedfile', async (req, res) => {
+    const selectedFile = req.body.selectedFile;
+    console.log('Selected File received:', selectedFile);
+    
+    try {
+        // Search for a document in the question collection with the matching section
+        const question1 = await question.findOne({ section: selectedFile }); // Using 'question' instead of 'Question'
+        
+        if (question1) {
+            // If a matching document is found, update the pickedBy field
+            question1.pickedBy = true; // Assuming HOD is picking the file
+            await question1.save();
+            console.log('Question updated:', question1);
+            res.status(200).send('Question updated successfully');
+        } else {
+            console.log('No matching question found');
+            res.status(404).send('No matching question found');
+        }
+    } catch (error) {
+        console.error('Error updating question:', error);
+        res.status(500).send('Failed to update question');
+    }
+});
+
+app.get('/questionpaper/isclicked', async(req,res)=>{
+    try {
+        // Retrieve all documents from the collection where pickedBy is true
+        const files = await question.find({ pickedBy: true });
+
+        // Send the retrieved files as JSON response to the client
+        res.status(200).json(files);
+    } catch (error) {
+        console.error('Error retrieving files:', error);
+        res.status(500).send('Failed to retrieve files');
+    }
+})
 
 app.listen(8000,()=>{
     console.log("port connected");
