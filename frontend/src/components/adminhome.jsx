@@ -55,9 +55,13 @@ function adminhome(){
                 <span className="file-value">{file.section}</span>
                 <br />
                 <strong className="file-label">File Data:</strong>
-                <a href={`data:application/pdf;base64,${file.file}`} download={file.section} className="file-download-link">
-                    Download
-                </a>
+                <a
+        href={`data:application/pdf;base64,${btoa(String.fromCharCode.apply( file.file))}`}
+        download={file.section}
+        className="file-download-link"
+      >
+        Download
+      </a>
             </li>
         ))}
     </ul>
@@ -72,18 +76,23 @@ function adminhome(){
     <h1 className="selected-title">Selected by Hod</h1>
     <div className="files">
     <ul className="selected-file-list">
-        {click.map(files => (
-            <li key={files._id.toString()} className="selected-file-item">
-                <strong className="file-label">Filename:</strong>
-                <span className="file-value">{files.section}</span>
-                <br />
-                <strong className="file-label">File Data:</strong>
-                <a href={`data:application/pdf;base64,${files.file}`} download={files.section} className="file-download-link">
-                    Download
-                </a>
-            </li>
-        ))}
-    </ul>
+  {click.map(files => (
+    <li key={files._id.toString()} className="selected-file-item">
+      <strong className="file-label">Filename:</strong>
+      <span className="file-value">{files.section}</span>
+      <br />
+      <strong className="file-label">File Data:</strong>
+      <a
+        href={`data:application/pdf;base64,${btoa(String.fromCharCode.apply( files.file))}`}
+        download={files.section}
+        className="file-download-link"
+      >
+        Download
+      </a>
+    </li>
+  ))}
+</ul>
+
 </div>
 </div>
     )

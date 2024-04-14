@@ -44,7 +44,7 @@ function Home() {
               body: formData
             });
             if (response.ok) {
-              console.log('File uploaded successfully');
+              alert('File uploaded successfully');
             } else {
               console.error('Failed to upload file');
             }

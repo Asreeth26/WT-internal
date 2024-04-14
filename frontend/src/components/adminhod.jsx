@@ -17,7 +17,7 @@ function adminhod(){
             console.log('Selected File:', selectedFileName);
             axios.post('http://localhost:8000/selectedfile', { selectedFile: selectedFileName })
                 .then(response => {
-                    console.log('Response from backend:', response.data);
+                    alert("Selected the Question Paper")
                 })
                 .catch(error => {
                     console.error('Error sending selected file to backend:', error);

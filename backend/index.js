@@ -1,5 +1,5 @@
 const express = require("express")
-
+const path = require('path');
 const collection = require("./mongo")
 const question = require("./questionpaperadd")
 const collection1 = require("./mongoAdmin")
@@ -132,8 +132,7 @@ app.get('/home', (req, res) => {
     });
 });
 
-
-const upload = multer();
+  const upload = multer();
 app.post('/questionpaper', upload.single('file'), async (req, res) => {
     try {
         const { section, subject } = req.body;
