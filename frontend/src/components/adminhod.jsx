@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react"
 import axios from 'axios';
+import './adminhod.css';
 
 function adminhod(){
     const [papers,setPapers] = useState([])
@@ -40,31 +41,39 @@ function adminhod(){
     },[])
     
     return(
-        <>
-        <h1>hi</h1>
-        <div>
-            <ul>
-                {papers.map(file => (
-                    <li key={file._id.toString()}>
-                        <input
-                            type="radio"
-                            id={file._id}
-                            name="file"
-                            onChange={() => handleCheckboxChange(file._id)}
-                            checked={selectedFile === file._id}
-                        />Select
-                        <label htmlFor={file._id}>
-                            <p>{file._id}</p>
-                            <strong>Filesec:</strong> {file.section}
-                            <br />
-                            <strong>Filesub:</strong> {file.subject}
-                        </label>
-                    </li>
-                ))}
-            </ul>
-            <button onClick={handleSubmit}>Submit</button>
-        </div>
-        </>
+        <div className="hod-dashboard">
+    <h1 className="hod-dashboard-title">HOD DASHBOARD</h1>
+    <div className="file-selection-container">
+        <ul className="file-list">
+            {papers.map(file => (
+                <li key={file._id.toString()} className="file-item">
+                    <div className="s">
+                    <label >Select</label>
+                    <input
+                        type="radio"
+                        id={file._id}
+                        name="file"
+                        onChange={() => handleCheckboxChange(file._id)}
+                        checked={selectedFile === file._id}
+                        className="file-input"
+                    />
+                    </div>
+                    <label htmlFor={file._id} className="file-label">
+                        <strong className="file-label-text">Filesec:</strong>
+                        <span className="file-value">{file.section}</span>
+                        <br />
+                        <strong className="file-label-text">Filesub:</strong>
+                        <span className="file-value">{file.subject}</span>
+                    </label>
+                </li>
+            ))}
+        </ul>
+        <button onClick={handleSubmit} className="submit-button">
+            Submit
+        </button>
+    </div>
+</div>
+
     )
 }
 

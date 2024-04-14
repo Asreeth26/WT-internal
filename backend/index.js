@@ -4,6 +4,7 @@ const collection = require("./mongo")
 const question = require("./questionpaperadd")
 const collection1 = require("./mongoAdmin")
 const collection2 = require("./mongoHOD")
+const StudentMarks = require("./mongoMarks")
 
 
 const session = require("express-session")
@@ -219,6 +220,36 @@ app.get('/questionpaper/isclicked', async(req,res)=>{
         res.status(500).send('Failed to retrieve files');
     }
 })
+
+app.put('/home/marks', async (req, res) => {
+    try {
+        const updatedMarksDataString = req.body;
+        const updatedMarksData = {};
+        for (const [key, value] of Object.entries(updatedMarksDataString)) {
+            updatedMarksData[key] = parseInt(value, 10);
+        console.log(updatedMarksData)
+        }
+        await StudentMarks.findOneAndUpdate({}, { marksData: updatedMarksData }, { upsert: true });
+      res.status(200).send('Marks updated successfully');
+    } catch (error) {
+      console.error('Error updating marks:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
+  
+  
+  // GET route to fetch student marks
+  app.get('/home/marks', async (req, res) => {
+    try {
+      const document = await StudentMarks.findOne({});
+      const marksData = document ? document.marksData : {};
+      console.log(document.marksData)
+      res.json(document.marksData);
+    } catch (error) {
+      console.error('Error fetching marks:', error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 
 app.listen(8000,()=>{
     console.log("port connected");

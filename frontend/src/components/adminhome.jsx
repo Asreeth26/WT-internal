@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react"
 import axios from 'axios';
+import './adminhome.css';
 
 function adminhome(){
 
@@ -42,43 +43,49 @@ function adminhome(){
 
     },[])
     return(
-        <>
-        <h1>hi</h1>
-        <ul>
-    {papers.map(file => (
-        <li key={file._id.toString()}> {/* Convert _id to string */}
-            <p>{file._id}</p>
-            <strong>Filename:</strong> {file.section}
-            <br />
-            <strong>File Data:</strong>
-            <a href={`data:application/pdf;base64,${file.file}`} download={file.section}>
-                            Download
-            </a>
-        </li>
-    ))}
-</ul>
+        <div className="admin-dashboard">
+    <h1 className="admin-dashboard-title">ADMIN DASHBOARD</h1>
+    <div className="files">
+    <h2 className="file-title">Question Papers</h2>
+    <ul className="file-list">
+        {papers.map(file => (
+            <li key={file._id.toString()} className="file-item">
+                {/* <p className="file-id">{file._id}</p> */}
+                <strong className="file-label">Teacher Section:</strong>
+                <span className="file-value">{file.section}</span>
+                <br />
+                <strong className="file-label">File Data:</strong>
+                <a href={`data:application/pdf;base64,${file.file}`} download={file.section} className="file-download-link">
+                    Download
+                </a>
+            </li>
+        ))}
+    </ul>
+    <div className="button-container">
+        <button onClick={handleButtonClick} className="send-button">
+            Click to send
+        </button>
+    </div>
+</div>
 
-        <div>
-            <button onClick={handleButtonClick}>Click to send
-            </button>
-        </div>
 
-        
-        <h1>Selected by Hod</h1>
-        <ul>
-  {click.map(files => (
-    <li key={files._id.toString()}>
-      <strong>Filename:</strong> {files.section}
-      <br />
-      <strong>File Data:</strong>
-            <a href={`data:application/pdf;base64,${files.file}`} download={files.section}>
-                            Download
-            </a>
-    </li>
-  ))}
-</ul>
-
-        </>
+    <h1 className="selected-title">Selected by Hod</h1>
+    <div className="files">
+    <ul className="selected-file-list">
+        {click.map(files => (
+            <li key={files._id.toString()} className="selected-file-item">
+                <strong className="file-label">Filename:</strong>
+                <span className="file-value">{files.section}</span>
+                <br />
+                <strong className="file-label">File Data:</strong>
+                <a href={`data:application/pdf;base64,${files.file}`} download={files.section} className="file-download-link">
+                    Download
+                </a>
+            </li>
+        ))}
+    </ul>
+</div>
+</div>
     )
 }
 

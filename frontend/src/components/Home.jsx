@@ -1,6 +1,8 @@
 import React, { useState, useEffect,useRef } from "react";
 import axios from "axios"; // Make sure to import axios
 import { useLocation  } from 'react-router-dom';
+import MarksPosting from "./MarksPosting";
+import './Home.css';
 
 function Home() {
     const location = useLocation();
@@ -54,20 +56,23 @@ function Home() {
     
 
     return (
-        <div className="homepage">
-            <h1>Hello {location.state.id} and welcome to the home</h1>
-            <div>
-                <h2>User Details:</h2>
-               
-
-            </div>
-            <p>{sub}</p>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="">FileName</label>
-                <input type="file" name="file" id="" ref={file} accept=".pdf"/> <br /> <br />
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
+      <div className="homepage">
+      <h1 className="welcome-message">Welcome, Teachers !!</h1>
+      <div className="user-details">
+        <h2 className="details">Teacher Details</h2>
+          <p className="section">Section: {sec}</p>
+          <p className="subject">Subject: {sub}</p>
+          <p className="email">Email: {location.state.id}</p>
+      </div>
+      <div className="section2">
+      <form onSubmit={handleSubmit} className="file-upload-form">
+          <label htmlFor="" className="file-label">Post Question Paper</label>
+          <input type="file" name="file" id="" ref={file} accept=".pdf" className="file-input"/> 
+          <input type="submit" value="Submit" className="submit-button" />
+      </form>
+      <MarksPosting />
+      </div>
+  </div>
     )
 }
 
