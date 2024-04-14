@@ -43,6 +43,8 @@ function Home() {
             });
             if (response.ok) {
               console.log('File uploaded successfully');
+              alert('file submitted');
+              event.reset();
             } else {
               console.error('Failed to upload file');
             }
