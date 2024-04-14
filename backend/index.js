@@ -250,6 +250,20 @@ app.put('/home/marks', async (req, res) => {
     }
   });
 
+
+app.get('/marks',async (req,res)=>{
+    try {
+        // Retrieve all documents from the collection
+        const files = await StudentMarks.find({});
+
+        // Send the retrieved files as JSON response to the client
+        res.status(200).json(files);
+    } catch (error) {
+        console.error('Error retrieving files:', error);
+        res.status(500).send('Failed to retrieve files');
+    }
+})
+
 app.listen(8000,()=>{
     console.log("port connected");
 })

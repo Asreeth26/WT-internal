@@ -6,6 +6,7 @@ import Hod from "./components/hodLogin"
 import Signup from "./components/Signup"
 import Adminhome from "./components/adminhome"
 import Adminhod from "./components/adminhod"
+import Marks from "./components/Marks"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from 'react';
 
@@ -21,6 +22,8 @@ function App() {
           <Route path="/home" element={<Home/>}/>
           <Route path="/adminhome" element={<Adminhome/>}/>
           <Route path="/adminhod" element={<Adminhod/>}/>
+          <Route path="/admin/marks" element={<Marks/>}/>
+
         </Routes>
       </Router>
     </div>
